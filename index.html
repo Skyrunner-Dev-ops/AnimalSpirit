@@ -6,57 +6,65 @@
     <title>Psychological AI Terminal</title>
 
     <style>
-        body {
-            margin: 0;
-            background: #0d0d0d;
-            color: #00ff88;
-            font-family: monospace;
-            -webkit-font-smoothing: antialiased;
-        }
+       body {
+    margin: 0;
+    background: #0d0d0d;
+    color: #00ff88;
+    font-family: monospace;
+    -webkit-font-smoothing: antialiased;
 
-        #terminal {
-            padding: 16px;
-            height: 100vh;
-            overflow-y: auto;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            box-sizing: border-box;
-        }
+    /* Responsive base font */
+    font-size: clamp(16px, 2.5vw, 20px);
+    line-height: 1.6;
+}
 
-        input {
-            background: black;
-            border: none;
-            color: #00ff88;
-            font-family: monospace;
-            font-size: 18px;
-            outline: none;
-            width: 85%;
-            padding: 6px 0;
-        }
+#terminal {
+    padding: clamp(14px, 3vw, 24px);
+    height: 100vh;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    box-sizing: border-box;
+}
 
-        .prompt {
-            display: inline;
-            margin-right: 6px;
-        }
+input {
+    background: black;
+    border: none;
+    color: #00ff88;
+    font-family: monospace;
 
-        /* Mobile adjustments */
-        @media (max-width: 600px) {
+    /* Large touch friendly input */
+    font-size: clamp(18px, 4vw, 22px);
+    outline: none;
+    width: 85%;
+    padding: 8px 0;
 
-            #terminal {
-                padding: 12px;
-                font-size: 15px;
-            }
+    /* Prevent iOS zoom */
+    transform: scale(1);
+}
 
-            input {
-                font-size: 20px;
-                width: 75%;
-            }
-        }
+.prompt {
+    display: inline;
+    margin-right: 6px;
+}
 
-        /* Smooth scroll */
-        html {
-            scroll-behavior: smooth;
-        }
+/* Extra boost for small phones */
+@media (max-width: 480px) {
+
+    body {
+        font-size: 18px;
+    }
+
+    input {
+        font-size: 22px;
+    }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
     </style>
 </head>
 
