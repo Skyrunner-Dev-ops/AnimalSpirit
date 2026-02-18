@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Psychological AI Terminal</title>
 
     <style>
@@ -10,13 +11,16 @@
             background: #0d0d0d;
             color: #00ff88;
             font-family: monospace;
+            -webkit-font-smoothing: antialiased;
         }
 
         #terminal {
-            padding: 20px;
-            height: 95vh;
+            padding: 16px;
+            height: 100vh;
             overflow-y: auto;
             white-space: pre-wrap;
+            word-wrap: break-word;
+            box-sizing: border-box;
         }
 
         input {
@@ -24,12 +28,34 @@
             border: none;
             color: #00ff88;
             font-family: monospace;
-            font-size: 16px;
+            font-size: 18px;
             outline: none;
+            width: 85%;
+            padding: 6px 0;
         }
 
         .prompt {
             display: inline;
+            margin-right: 6px;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 600px) {
+
+            #terminal {
+                padding: 12px;
+                font-size: 15px;
+            }
+
+            input {
+                font-size: 20px;
+                width: 75%;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </head>
@@ -105,18 +131,18 @@ function typePrint(text, speed=15) {
 
 function createInput() {
     const line = document.createElement("div");
+
     const span = document.createElement("span");
     span.textContent = " > ";
     span.className = "prompt";
 
     const input = document.createElement("input");
-    input.autofocus = true;
 
     line.appendChild(span);
     line.appendChild(input);
     terminal.appendChild(line);
-    terminal.scrollTop = terminal.scrollHeight;
 
+    terminal.scrollTop = terminal.scrollHeight;
     input.focus();
 
     input.addEventListener("keydown", function(e){
@@ -137,7 +163,6 @@ async function startGame() {
 
 function handleInput(value) {
 
-    // EXPORT
     if (value.toLowerCase() === "export") {
         if (savedResult !== "") {
             try {
@@ -154,7 +179,6 @@ function handleInput(value) {
         return;
     }
 
-    // NAME
     if (!gameStarted) {
         if (value.length < 2) {
             print("Codename invalid.");
